@@ -9,7 +9,8 @@ void clear_tok_cmd(shell_sts_t *sts)
 {
 	if (sts->tok_cmd != NULL)
 	{
-		free(*(sts->tok_cmd));
+		if ((*sts->tok_cmd) != NULL)
+			free(*(sts->tok_cmd));
 		free(sts->tok_cmd);
 		sts->tok_cmd = NULL;
 	}
