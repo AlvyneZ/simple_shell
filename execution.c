@@ -27,13 +27,13 @@ void execute_cmd(shell_sts_t *sts)
 		/* The rest is only executed in case of error (print it) */
 		perror(sts->tok_cmd[0]);
 		/* Avoiding memory leak in child process */
-		clear_cmd_buffer(&sts);
-		clear_tok_cmd(&sts);
+		clear_cmd_buffer(sts);
+		clear_tok_cmd(sts);
 		exit(98);
 	}
 	else
 	{
-		/* In the parent, await the child to complete eecution */
+		/* In the parent, await the child to complete execution */
 		wait(&status);
 	}
 }
