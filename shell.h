@@ -44,6 +44,9 @@ int _strncmp(char *s1, char *s2, int n);
 void clear_cmd_buffer(shell_sts_t *sts);
 int get_command(shell_sts_t *sts);
 
+/* Defined in builtin_handling.h */
+int handle_builtin(shell_sts_t *sts);
+
 /* Defined in tokeniser.c */
 void clear_tok_cmd(shell_sts_t *sts);
 void tokenise_cmd(shell_sts_t *sts);

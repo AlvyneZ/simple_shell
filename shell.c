@@ -24,9 +24,11 @@ int main(int argc, char **argv, char **envp)
 			continue;
 		if (sts.cur_cmd_len <= 0) /* Error or End of file */
 		{
-			printf("\nexit\n");
+			printf("\n");
 			break;
 		}
+		if (handle_builtin(&sts))
+			continue;
 		tokenise_cmd(&sts);
 		check_exec_path(&sts);
 		execute_cmd(&sts);
