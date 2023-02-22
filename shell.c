@@ -24,8 +24,15 @@ int main(int argc, char **argv, char **envp)
 			continue;
 		if (sts.cur_cmd_len <= 0) /* Error or End of file */
 		{
-			printf("\n");
-			break;
+			clear_cmd_buffer(&sts);
+			clear_tok_cmd(&sts);
+			clear_exec(&sts);
+			clear_paths(&sts);
+			if (errno == 0)
+			{
+				printf("\nexit\n");
+				exit(0);
+			}
 		}
 		if (handle_builtin(&sts))
 			continue;

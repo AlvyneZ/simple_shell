@@ -28,6 +28,7 @@ int get_command(shell_sts_t *sts)
 		write(STDOUT_FILENO, "# ", 2);
 
 	clear_cmd_buffer(sts);
+	errno = 0;
 	sts->cur_cmd_len = getline(&(sts->cur_cmd), &(sts->cur_cmd_sz), stdin);
 	return (sts->cur_cmd_len);
 }

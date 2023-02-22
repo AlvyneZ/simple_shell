@@ -2,6 +2,7 @@
 #define SHELL_HEADER_INCLUDE_
 
 #include <stdlib.h>
+#include <errno.h>
 
 /**
  * struct shell_sts_s - Structure for storing the shell program status

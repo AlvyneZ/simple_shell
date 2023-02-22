@@ -1,5 +1,6 @@
 #include "shell.h"
 #include <unistd.h>
+#include <stdio.h>
 
 /**
 * _strcmp - Compares two strings
@@ -47,6 +48,7 @@ int handle_builtin(shell_sts_t *sts)
 		clear_tok_cmd(sts);
 		clear_exec(sts);
 		clear_paths(sts);
+		printf("%s", exit_str);
 		exit(0);
 	}
 	return (0);
