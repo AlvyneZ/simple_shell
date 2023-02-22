@@ -14,9 +14,10 @@ int main(int argc, char **argv, char **envp)
 	shell_sts_t sts = {0};
 
 	(void)argc;
-	(void) argv;
+	sts.sh_name = argv[0];
 	sts.envp = envp;
 	sts.interactive_md = (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO));
+	retrieve_path(&sts);
 
 	do {
 		if (get_command(&sts) == 1) /* Empty line */
@@ -27,13 +28,17 @@ int main(int argc, char **argv, char **envp)
 			break;
 		}
 		tokenise_cmd(&sts);
+		check_exec_path(&sts);
 		execute_cmd(&sts);
 		clear_cmd_buffer(&sts);
 		clear_tok_cmd(&sts);
+		clear_exec(&sts);
 	} while (sts.interactive_md);
 
 	clear_cmd_buffer(&sts);
 	clear_tok_cmd(&sts);
+	clear_exec(&sts);
+	clear_paths(&sts);
 
 	return (0);
 }

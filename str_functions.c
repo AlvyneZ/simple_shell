@@ -73,3 +73,25 @@ char *_strdup(char *str)
 		return (_strcpy(dup, str));
 	return (NULL);
 }
+
+/**
+* _strncmp - Compares two strings upto a certain index
+ * @s1: First string
+ * @s2: second string
+ * @n: number of bytes to compare
+ * Return: Lexicographic difference of the strings
+ */
+int _strncmp(char *s1, char *s2, int n)
+{
+	int ind;
+
+	for (ind = 0; ((s1[ind]) && (s2[ind]) && (ind < n)); ind++)
+	{
+		if (s1[ind] - s2[ind])
+			return (s1[ind] - s2[ind]);
+	}
+
+	if (ind >= n)
+		return (0);
+	return (s1[ind] - s2[ind]);
+}
