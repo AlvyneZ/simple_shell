@@ -110,7 +110,8 @@ void check_exec_path(shell_sts_t *sts)
 		return;
 	if ((sts->tok_cmd[0][0] == '.') || (sts->tok_cmd[0][0] == '/'))
 	{
-		sts->exec = _strdup(sts->tok_cmd[0]);
+		if (access(sts->tok_cmd[0], F_OK | X_OK) == 0)
+			sts->exec = _strdup(sts->tok_cmd[0]);
 		return;
 	}
 	for (cnt = 0; ((sts->paths != NULL) && (sts->paths[cnt] != NULL)); cnt++)

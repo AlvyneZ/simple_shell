@@ -30,9 +30,6 @@ int main(int argc, char **argv, char **envp)
 		tokenise_cmd(&sts);
 		check_exec_path(&sts);
 		execute_cmd(&sts);
-		clear_cmd_buffer(&sts);
-		clear_tok_cmd(&sts);
-		clear_exec(&sts);
 	} while (sts.interactive_md);
 
 	clear_cmd_buffer(&sts);
