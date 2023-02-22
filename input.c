@@ -25,7 +25,7 @@ int get_command(shell_sts_t *sts)
 {
 	/* Prompting user for input if in interactive mode */
 	if (sts->interactive_md)
-		write(STDOUT_FILENO, "#simple_shell$ ", 15);
+		write(STDOUT_FILENO, "# ", 2);
 
 	clear_cmd_buffer(sts);
 	sts->cur_cmd_len = getline(&(sts->cur_cmd), &(sts->cur_cmd_sz), stdin);
