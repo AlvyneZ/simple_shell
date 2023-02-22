@@ -23,7 +23,7 @@ void clear_tok_cmd(shell_sts_t *sts)
 void tokenise_cmd(shell_sts_t *sts)
 {
 	char *cmd = NULL, *cur = NULL;
-	char *delimiters = " :\t\r\n";
+	char *delimiters = " \t\r\n";
 	int cnt = 0;
 
 	clear_tok_cmd(sts);

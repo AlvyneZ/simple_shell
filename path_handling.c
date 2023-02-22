@@ -38,7 +38,7 @@ void clear_exec(shell_sts_t *sts)
 void tokenise_path(char *path, shell_sts_t *sts)
 {
 	char *pth = NULL, *cur = NULL;
-	char *delimiters = " :\t\r\n";
+	char *delimiters = ":";
 	int cnt = 0;
 
 	clear_paths(sts);
