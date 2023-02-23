@@ -30,7 +30,7 @@ int main(int argc, char **argv, char **envp)
 			clear_paths(&sts);
 			if (errno == 0)
 			{
-				printf("\nexit\n");
+				write(STDOUT_FILENO, "\nexit\n", 6);
 				exit(0);
 			}
 		}
