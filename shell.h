@@ -46,6 +46,7 @@ void clear_cmd_buffer(shell_sts_t *sts);
 int get_command(shell_sts_t *sts);
 
 /* Defined in builtin_handling.h */
+int _strcmp(char *s1, char *s2);
 int handle_builtin(shell_sts_t *sts);
 
 /* Defined in tokeniser.c */

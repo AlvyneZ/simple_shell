@@ -1,6 +1,21 @@
 #include "shell.h"
 #include <unistd.h>
 #include <stdio.h>
+#include <signal.h>
+
+/**
+ * handle_signal - Handles SIGINT (CTRL+C) and allows graceful exit
+ * @signal_number: signal number associated with signal
+ */
+void handle_signal(int signal_number)
+{
+	/* declaring the signal number as unused variable */
+	(void)signal_number;
+
+	/* writing to the terminal to revert to non-interactive */
+	write(STDERR_FILENO, "\n", 1);
+	write(STDERR_FILENO, "# ", 2);
+}
 
 /**
  * main - simple REPL shell program
@@ -18,27 +33,11 @@ int main(int argc, char **argv, char **envp)
 	sts.envp = envp;
 	sts.interactive_md = (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO));
 	retrieve_path(&sts);
+	signal(SIGINT, handle_signal);
 
 	do {
 		if (get_command(&sts) == 1) /* Empty line */
 			continue;
-		if (sts.cur_cmd_len <= 0) /* Error or End of file */
-		{
-			clear_cmd_buffer(&sts);
-			clear_tok_cmd(&sts);
-			clear_exec(&sts);
-			clear_paths(&sts);
-			if (errno == 0)
-			{
-				write(STDOUT_FILENO, "\n", 1);
-				exit(0);
-			}
-			else
-			{
-				perror(sts.sh_name);
-				exit(98);
-			}
-		}
 		if (handle_builtin(&sts))
 			continue;
 		tokenise_cmd(&sts);

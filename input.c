@@ -30,5 +30,24 @@ int get_command(shell_sts_t *sts)
 	clear_cmd_buffer(sts);
 	errno = 0;
 	sts->cur_cmd_len = getline(&(sts->cur_cmd), &(sts->cur_cmd_sz), stdin);
+
+	if (sts->cur_cmd_len <= 0) /* Error or End of file */
+	{
+		clear_cmd_buffer(sts);
+		clear_tok_cmd(sts);
+		clear_exec(sts);
+		clear_paths(sts);
+		if (errno == 0)
+		{
+			write(STDOUT_FILENO, "\n", 1);
+			exit(0);
+		}
+		else
+		{
+			perror(sts->sh_name);
+			exit(98);
+		}
+	}
+
 	return (sts->cur_cmd_len);
 }
