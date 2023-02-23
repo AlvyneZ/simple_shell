@@ -30,8 +30,13 @@ int main(int argc, char **argv, char **envp)
 			clear_paths(&sts);
 			if (errno == 0)
 			{
-				write(STDOUT_FILENO, "\nexit\n", 6);
+				write(STDERR_FILENO, "\n", 1);
 				exit(0);
+			}
+			else
+			{
+				perror(sts.sh_name);
+				exit(98);
 			}
 		}
 		if (handle_builtin(&sts))
@@ -45,6 +50,5 @@ int main(int argc, char **argv, char **envp)
 	clear_tok_cmd(&sts);
 	clear_exec(&sts);
 	clear_paths(&sts);
-
 	return (0);
 }

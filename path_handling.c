@@ -59,7 +59,7 @@ void tokenise_path(char *path, shell_sts_t *sts)
 			} while (((*cur) != '\0') && (_strchr(delimiters, *cur) != NULL));
 		}
 	}
-	sts->paths = malloc(sizeof(char *) * (cnt + 1));
+	sts->paths = malloc(sizeof(char *) * (cnt + 2));
 	if (sts->paths == NULL)
 	{
 		free(pth);
@@ -127,6 +127,7 @@ void check_exec_path(shell_sts_t *sts)
 			exec_path[ind_p++] = '/';
 		for (ind_c = 0; sts->tok_cmd[0][ind_c] != '\0'; ind_c++)
 			exec_path[ind_p++] = sts->tok_cmd[0][ind_c];
+		exec_path[ind_p++] = '\0';
 
 		/* Checking if the combined path is an executable */
 		if (access(exec_path, F_OK | X_OK) == 0)
@@ -135,6 +136,6 @@ void check_exec_path(shell_sts_t *sts)
 			return;
 		}
 		/* Avoid memory leaks */
-		clear_exec(sts);
+		free(exec_path);
 	}
 }
