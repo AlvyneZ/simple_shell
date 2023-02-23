@@ -30,7 +30,7 @@ int main(int argc, char **argv, char **envp)
 			clear_paths(&sts);
 			if (errno == 0)
 			{
-				write(STDERR_FILENO, "\n", 1);
+				write(STDOUT_FILENO, "\n", 1);
 				exit(0);
 			}
 			else

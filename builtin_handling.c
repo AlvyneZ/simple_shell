@@ -47,7 +47,7 @@ int handle_builtin(shell_sts_t *sts)
 		clear_tok_cmd(sts);
 		clear_exec(sts);
 		clear_paths(sts);
-		write(STDOUT_FILENO, exit_str, _strlen(exit_str));
+		/*write(STDOUT_FILENO, exit_str, _strlen(exit_str));*/
 		exit(0);
 	}
 	return (0);
